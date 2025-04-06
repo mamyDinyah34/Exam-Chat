@@ -12,5 +12,10 @@ import java.util.Optional;
 
 @Repository
 public interface ChatRepository extends JpaRepository<Chat, Long> {
+    @Query("select c from Chat c join c.users u where u.id = :userId")
+    List<Chat> findChatByUserId(@Param("userId") Long userId);
+
+    @Query("SELECT c FROM Chat c WHERE c.isGroup = false AND :user2 MEMBER OF c.users AND :reqUser MEMBER OF c.users")
+    Optional<Chat> findSingleChatByUsers(@Param("user2") User user2, @Param("reqUser") User reqUser);
 
 }
