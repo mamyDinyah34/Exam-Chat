@@ -1,9 +1,13 @@
 package com.mamydinyah.chat.service.implementation;
 
+import com.mamydinyah.chat.dto.request.UpdateUserRequestDto;
 import com.mamydinyah.chat.entity.User;
 import com.mamydinyah.chat.repository.UserRepository;
+import com.mamydinyah.chat.security.JWT.JwtConstants;
+import com.mamydinyah.chat.security.JWT.JwtGenerator;
 import com.mamydinyah.chat.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -12,6 +16,8 @@ import java.util.*;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private JwtGenerator jwtGenerator;
 
     @Override
     public User findUserById(Long id) {
@@ -23,6 +29,29 @@ public class UserServiceImpl implements UserService {
         }
 
         throw new RuntimeException("User not found with id " + id);
+    }
+
+    @Override
+    public User findUserByProfile(String jwt) {
+        String email = String.valueOf(jwtGenerator.claimsFromToken(jwt).get(JwtConstants.EMAIL));
+
+        if (email == null) {
+            throw new BadCredentialsException("Invalid token");
+        }
+        Optional<User> user = userRepository.findByEmail(email);
+        if (user.isPresent()) {
+            return user.get();
+        }
+        throw new RuntimeException("User not found with email " + email);
+    }
+
+    @Override
+    public User updateUser(Long id, UpdateUserRequestDto request) {
+        User user = findUserById(id);
+        if (Objects.nonNull(request.fullName())) {
+            user.setFullName(request.fullName());
+        }
+        return userRepository.save(user);
     }
 
 }

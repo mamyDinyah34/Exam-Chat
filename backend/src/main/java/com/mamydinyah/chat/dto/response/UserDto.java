@@ -10,11 +10,11 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Builder
-public record UserDTO(Long id, String email, String fullName, String nickname, String profile) {
+public record UserDto(Long id, String email, String fullName, String nickname, String profile) {
 
-    public static UserDTO fromUser(User user) {
+    public static UserDto fromUser(User user) {
         if (Objects.isNull(user)) return null;
-        return UserDTO.builder()
+        return UserDto.builder()
                 .id(user.getId())
                 .email(user.getEmail())
                 .fullName(user.getFullName())
@@ -22,17 +22,17 @@ public record UserDTO(Long id, String email, String fullName, String nickname, S
                 .build();
     }
 
-    public static Set<UserDTO> fromUsers(Collection<User> users) {
+    public static Set<UserDto> fromUsers(Collection<User> users) {
         if (Objects.isNull(users)) return Set.of();
         return users.stream()
-                .map(UserDTO::fromUser)
+                .map(UserDto::fromUser)
                 .collect(Collectors.toSet());
     }
 
-    public static List<UserDTO> fromUsersAsList(Collection<User> users) {
+    public static List<UserDto> fromUsersAsList(Collection<User> users) {
         if (Objects.isNull(users)) return List.of();
         return users.stream()
-                .map(UserDTO::fromUser)
+                .map(UserDto::fromUser)
                 .toList();
     }
 
