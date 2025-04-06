@@ -8,6 +8,7 @@ import com.mamydinyah.chat.repository.UserRepository;
 import com.mamydinyah.chat.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -18,6 +19,8 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     @Autowired
     private JwtGenerator jwtGenerator;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public User findUserById(Long id) {
@@ -47,6 +50,12 @@ public class UserServiceImpl implements UserService {
         User user = findUserById(id);
         if (Objects.nonNull(request.fullName())) {
             user.setFullName(request.fullName());
+        }
+        if (Objects.nonNull(request.email())) {
+            user.setEmail(request.email());
+        }
+        if (Objects.nonNull(request.password())) {
+            user.setPassword(passwordEncoder.encode(request.password()));
         }
         return userRepository.save(user);
     }

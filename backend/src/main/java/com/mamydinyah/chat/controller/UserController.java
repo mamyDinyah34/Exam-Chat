@@ -50,6 +50,7 @@ public class UserController {
                                                      @RequestHeader(JwtConstants.TOKEN_HEADER) String token)
     {
         User user = userService.findUserByProfile(token);
+        System.out.println("user: " +user );
         user = userService.updateUser(user.getId(), request);
         log.info("User updated: {}", user.getEmail());
          ApiResponseDto response =  ApiResponseDto.builder()
