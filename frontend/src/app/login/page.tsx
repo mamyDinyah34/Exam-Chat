@@ -14,10 +14,11 @@ import { currentUser, loginUser } from "../../redux/auth/Action"
 
 const SignIn = () => {
   const router = useRouter()
-  const { theme, setTheme } = useTheme()
+  const { theme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
-  const [isRedirecting, setIsRedirecting] = useState(false)
+  const [isLoggingIn, setIsLoggingIn] = useState(false)
+  const [forceLoginMode, setForceLoginMode] = useState(false)
 
   const dispatch: Dispatch<any> = useDispatch()
   const token = typeof window !== "undefined" ? localStorage.getItem(TOKEN) : null
@@ -28,23 +29,25 @@ const SignIn = () => {
     password: "",
   })
 
-  useEffect(() => {
-    if (token && !isRedirecting) {
-      dispatch(currentUser(token))
-    }
-  }, [token, dispatch, isRedirecting])
-
-  useEffect(() => {
-    if (state.reqUser && !isRedirecting) {
-      setIsRedirecting(true)
-      console.log("User authenticated, redirecting to home")
-      router.push("/home")
-    }
-  }, [state.reqUser, router, isRedirecting])
-
+  // Set mounted state
   useEffect(() => {
     setMounted(true)
   }, [])
+
+  // Handle authentication check on mount
+  useEffect(() => {
+    // Only check token if we're not in force login mode and not already logged in
+    if (token && !forceLoginMode && !state.reqUser) {
+      dispatch(currentUser(token))
+    }
+  }, [token, forceLoginMode, state.reqUser, dispatch])
+
+  // Handle redirection after successful login
+  useEffect(() => {
+    if (state.reqUser && !forceLoginMode) {
+      router.push("/home")
+    }
+  }, [state.reqUser, router, forceLoginMode])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSignInData({
@@ -55,12 +58,14 @@ const SignIn = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    console.log("Sign in form submitted")
 
-    if (!state.reqUser) {
-      dispatch(loginUser(signInData))
-    } else {
-      console.log("User already logged in")
+    if (forceLoginMode || !state.reqUser) {
+      setIsLoggingIn(true)
+
+      // Dispatch login action
+      dispatch(loginUser(signInData)).finally(() => {
+        setIsLoggingIn(false)
+      })
     }
   }
 
@@ -68,12 +73,12 @@ const SignIn = () => {
     setShowPassword(!showPassword)
   }
 
-  if (!mounted) {
-    return <div className="min-h-screen flex items-center justify-center">Loading...</div>
+  const enableForceLogin = () => {
+    setForceLoginMode(true)
   }
 
-  const forceLogin = () => {
-    setIsRedirecting(false)
+  if (!mounted) {
+    return <div className="min-h-screen flex items-center justify-center">Loading...</div>
   }
 
   const isDarkMode = theme === "dark"
@@ -96,13 +101,13 @@ const SignIn = () => {
             <h1 className={`text-2xl font-bold ${isDarkMode ? "text-gray-100" : "text-gray-800"}`}>Sign In</h1>
           </div>
 
-          {state.reqUser && (
+          {state.reqUser && !forceLoginMode && (
             <div
               className={`mb-4 p-3 rounded-md text-center ${isDarkMode ? "bg-gray-700 text-gray-200" : "bg-blue-50 text-blue-800"}`}
             >
               <p>You're already logged in.</p>
               <button
-                onClick={forceLogin}
+                onClick={enableForceLogin}
                 className={`mt-2 text-sm font-medium ${
                   isDarkMode ? "text-indigo-400 hover:text-indigo-300" : "text-indigo-600 hover:text-indigo-800"
                 }`}
@@ -113,6 +118,15 @@ const SignIn = () => {
           )}
 
           <form onSubmit={handleSubmit} className="space-y-4">
+            {state.error && (
+              <div
+                className={`p-3 mb-4 rounded-md text-center ${
+                  isDarkMode ? "bg-red-900/50 text-red-200" : "bg-red-100 text-red-800"
+                }`}
+              >
+                <p>Invalid credentials. Please try again.</p>
+              </div>
+            )}
             <div className="relative">
               <label
                 htmlFor="email"
@@ -217,6 +231,7 @@ const SignIn = () => {
               <Button
                 type="submit"
                 variant="contained"
+                disabled={isLoggingIn}
                 fullWidth
                 sx={{
                   borderRadius: "12px",
@@ -231,7 +246,33 @@ const SignIn = () => {
                   },
                 }}
               >
-                Sign In
+                {isLoggingIn ? (
+                  <div className="flex items-center gap-2">
+                    <svg
+                      className="animate-spin h-5 w-5 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      ></path>
+                    </svg>
+                    <span>Signing in...</span>
+                  </div>
+                ) : (
+                  "Sign In"
+                )}
               </Button>
             </div>
           </form>
@@ -253,4 +294,3 @@ const SignIn = () => {
 }
 
 export default SignIn
-

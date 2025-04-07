@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { MessageCircle, Menu, Sun, Moon, Users, Shield } from "lucide-react"
+import { MessageCircle, Sun, Moon, Users } from "lucide-react"
 import { useTheme } from "next-themes"
 import { motion } from "framer-motion"
 import { Button as MuiButton } from "@mui/material"
@@ -47,7 +47,9 @@ export default function Home() {
   const isDarkMode = theme === "dark"
 
   return (
-    <div className={`flex min-h-screen flex-col ${isDarkMode ? "bg-gray-900 text-gray-100" : "bg-white text-gray-900"}`}>
+    <div
+      className={`flex min-h-screen flex-col ${isDarkMode ? "bg-gray-900 text-gray-100" : "bg-white text-gray-900"}`}
+    >
       <motion.header
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -65,7 +67,7 @@ export default function Home() {
               <MuiButton
                 variant="text"
                 size="small"
-                sx={{ minWidth: '32px', width: '32px', height: '32px', padding: 0 }}
+                sx={{ minWidth: "32px", width: "32px", height: "32px", padding: 0 }}
                 onClick={() => {
                   const newTheme = theme === "dark" ? "light" : "dark"
                   setTheme(newTheme)
@@ -79,26 +81,36 @@ export default function Home() {
             <div className="md:hidden">
               <DropdownMenu.Root>
                 <DropdownMenu.Trigger asChild>
-                  <MuiButton 
-                    variant="text" 
-                    sx={{ minWidth: '32px' }}
-                  >
+                  <MuiButton variant="text" sx={{ minWidth: "32px" }}>
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M1.5 3C1.22386 3 1 3.22386 1 3.5C1 3.77614 1.22386 4 1.5 4H13.5C13.7761 4 14 3.77614 14 3.5C14 3.22386 13.7761 3 13.5 3H1.5ZM1.5 7C1.22386 7 1 7.22386 1 7.5C1 7.77614 1.22386 8 1.5 8H13.5C13.7761 8 14 7.77614 14 7.5C14 7.22386 13.7761 7 13.5 7H1.5ZM1 11.5C1 11.2239 1.22386 11 1.5 11H13.5C13.7761 11 14 11.2239 14 11.5C14 11.7761 13.7761 12 13.5 12H1.5C1.22386 12 1 11.7761 1 11.5Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"></path>
+                      <path
+                        d="M1.5 3C1.22386 3 1 3.22386 1 3.5C1 3.77614 1.22386 4 1.5 4H13.5C13.7761 4 14 3.77614 14 3.5C14 3.22386 13.7761 3 13.5 3H1.5ZM1.5 7C1.22386 7 1 7.22386 1 7.5C1 7.77614 1.22386 8 1.5 8H13.5C13.7761 8 14 7.77614 14 7.5C14 7.22386 13.7761 7 13.5 7H1.5ZM1 11.5C1 11.2239 1.22386 11 1.5 11H13.5C13.7761 11 14 11.2239 14 11.5C14 11.7761 13.7761 12 13.5 12H1.5C1.22386 12 1 11.7761 1 11.5Z"
+                        fill="currentColor"
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                      ></path>
                     </svg>
                   </MuiButton>
                 </DropdownMenu.Trigger>
                 <DropdownMenu.Portal>
-                  <DropdownMenu.Content 
+                  <DropdownMenu.Content
                     className={`min-w-[160px] rounded-md p-1 shadow-md ${isDarkMode ? "bg-gray-800 text-gray-100" : "bg-white text-gray-900"}`}
                     align="end"
                     sideOffset={5}
                   >
-                    <DropdownMenu.Item className={`rounded px-2 py-2 outline-none cursor-pointer ${isDarkMode ? "hover:bg-gray-700" : "hover:bg-gray-100"}`}>
-                      <Link href="/login" className="block w-full">Login</Link>
+                    <DropdownMenu.Item
+                      className={`rounded px-2 py-2 outline-none cursor-pointer ${isDarkMode ? "hover:bg-gray-700" : "hover:bg-gray-100"}`}
+                    >
+                      <Link href="/login" className="block w-full">
+                        Login
+                      </Link>
                     </DropdownMenu.Item>
-                    <DropdownMenu.Item className={`rounded px-2 py-2 outline-none cursor-pointer ${isDarkMode ? "hover:bg-gray-700" : "hover:bg-gray-100"}`}>
-                      <Link href="/register" className="block w-full">Sign Up</Link>
+                    <DropdownMenu.Item
+                      className={`rounded px-2 py-2 outline-none cursor-pointer ${isDarkMode ? "hover:bg-gray-700" : "hover:bg-gray-100"}`}
+                    >
+                      <Link href="/register" className="block w-full">
+                        Sign Up
+                      </Link>
                     </DropdownMenu.Item>
                   </DropdownMenu.Content>
                 </DropdownMenu.Portal>
@@ -146,8 +158,7 @@ export default function Home() {
                     transition={{ duration: 0.6, delay: 0.4 }}
                     className={`max-w-[600px] ${isDarkMode ? "text-gray-300" : "text-gray-600"} md:text-xl`}
                   >
-                    Mi-Tafa makes it easy to stay connected with friends and family. Send messages, share photos, and
-                    more.
+                    Mi-Tafa makes it easy to stay connected with friends and family. Send messages.
                   </motion.p>
                 </div>
                 <motion.div
@@ -158,12 +169,16 @@ export default function Home() {
                 >
                   <motion.div variants={fadeIn} whileHover={buttonHover} className="w-full sm:w-auto">
                     <Link href="/register">
-                        <MuiButton className="w-full" variant="contained">Get Started</MuiButton>
-                      </Link>
+                      <MuiButton className="w-full" variant="contained">
+                        Get Started
+                      </MuiButton>
+                    </Link>
                   </motion.div>
                   <motion.div variants={fadeIn} whileHover={buttonHover} className="w-full sm:w-auto">
                     <Link href="/login">
-                      <MuiButton variant="text" className="w-full">Login</MuiButton>
+                      <MuiButton variant="text" className="w-full">
+                        Login
+                      </MuiButton>
                     </Link>
                   </motion.div>
                 </motion.div>
@@ -179,7 +194,7 @@ export default function Home() {
                   transition={{ duration: 0.3 }}
                   alt="Mi-Tafa App Screenshot"
                   className="aspect-video overflow-hidden rounded-xl object-cover object-center w-full shadow-lg"
-                  src="https://api.dicebear.com/7.x/avataaars/svg?seed=%20ha"
+                  src="https://api.dicebear.com/7.x/avataaars/svg?seed=%20happy"
                 />
               </motion.div>
             </div>
@@ -198,10 +213,14 @@ export default function Home() {
               className="flex flex-col items-center justify-center space-y-4 text-center"
             >
               <div className="space-y-2">
-                <h2 className={`text-3xl font-bold tracking-tighter md:text-4xl ${isDarkMode ? "text-white" : "text-gray-900"}`}>
+                <h2
+                  className={`text-3xl font-bold tracking-tighter md:text-4xl ${isDarkMode ? "text-white" : "text-gray-900"}`}
+                >
                   Features
                 </h2>
-                <p className={`max-w-[900px] ${isDarkMode ? "text-gray-300" : "text-gray-600"} md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed`}>
+                <p
+                  className={`max-w-[900px] ${isDarkMode ? "text-gray-300" : "text-gray-600"} md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed`}
+                >
                   Everything you need to stay connected with your friends and family
                 </p>
               </div>
@@ -211,7 +230,7 @@ export default function Home() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="mx-auto grid max-w-5xl grid-cols-1 gap-6 py-12 sm:grid-cols-2 md:grid-cols-3"
+              className="mx-auto grid max-w-5xl grid-cols-1 gap-6 py-12 sm:grid-cols-2"
             >
               <motion.div
                 variants={fadeIn}
@@ -221,7 +240,9 @@ export default function Home() {
                 <div className="rounded-full bg-primary/10 p-3">
                   <MessageCircle className="h-6 w-6 text-primary" />
                 </div>
-                <h3 className={`text-xl font-bold ${isDarkMode ? "text-white" : "text-gray-900"}`}>Real-time Messaging</h3>
+                <h3 className={`text-xl font-bold ${isDarkMode ? "text-white" : "text-gray-900"}`}>
+                  Real-time Messaging
+                </h3>
                 <p className={`text-center ${isDarkMode ? "text-gray-300" : "text-gray-600"}`}>
                   Send and receive messages instantly with real-time updates
                 </p>
@@ -234,22 +255,11 @@ export default function Home() {
                 <div className="rounded-full bg-primary/10 p-3">
                   <Users className="h-6 w-6 text-primary" />
                 </div>
-                <h3 className={`text-xl font-bold ${isDarkMode ? "text-white" : "text-gray-900"}`}>Friend Management</h3>
+                <h3 className={`text-xl font-bold ${isDarkMode ? "text-white" : "text-gray-900"}`}>
+                  Friend Management
+                </h3>
                 <p className={`text-center ${isDarkMode ? "text-gray-300" : "text-gray-600"}`}>
                   Add friends, create groups, and manage your contacts easily
-                </p>
-              </motion.div>
-              <motion.div
-                variants={fadeIn}
-                whileHover={{ scale: 1.05, boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1)" }}
-                className={`flex flex-col items-center space-y-2 rounded-lg p-4 ${isDarkMode ? "bg-gray-800/50" : "bg-white"}`}
-              >
-                <div className="rounded-full bg-primary/10 p-3">
-                  <Shield className="h-6 w-6 text-primary" />
-                </div>
-                <h3 className={`text-xl font-bold ${isDarkMode ? "text-white" : "text-gray-900"}`}>Secure & Private</h3>
-                <p className={`text-center ${isDarkMode ? "text-gray-300" : "text-gray-600"}`}>
-                  Your conversations are secure and private with end-to-end encryption
                 </p>
               </motion.div>
             </motion.div>
@@ -264,14 +274,22 @@ export default function Home() {
         className={`border-t py-6 md:py-0 ${isDarkMode ? "border-gray-700 bg-gray-900" : "border-gray-200 bg-white"}`}
       >
         <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
-          <p className={`text-center text-sm leading-loose ${isDarkMode ? "text-gray-400" : "text-gray-600"} md:text-left`}>
+          <p
+            className={`text-center text-sm leading-loose ${isDarkMode ? "text-gray-400" : "text-gray-600"} md:text-left`}
+          >
             © 2025 Mi-Tafa.
           </p>
           <div className="flex items-center gap-4">
-            <Link href="#" className={`text-sm ${isDarkMode ? "text-gray-400" : "text-gray-600"} underline underline-offset-4`}>
+            <Link
+              href="#"
+              className={`text-sm ${isDarkMode ? "text-gray-400" : "text-gray-600"} underline underline-offset-4`}
+            >
               Terms of Service
             </Link>
-            <Link href="#" className={`text-sm ${isDarkMode ? "text-gray-400" : "text-gray-600"} underline underline-offset-4`}>
+            <Link
+              href="#"
+              className={`text-sm ${isDarkMode ? "text-gray-400" : "text-gray-600"} underline underline-offset-4`}
+            >
               Privacy
             </Link>
           </div>
@@ -280,3 +298,4 @@ export default function Home() {
     </div>
   )
 }
+
