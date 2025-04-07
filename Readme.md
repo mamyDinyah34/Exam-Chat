@@ -109,7 +109,36 @@ The application will be available at `http://localhost:3000`.
 
 ## 🖼️ Screenshots
 
+<details>
+<summary>Click to view screenshots</summary>
 
+### Landing Page
+<img src="https://github.com/user-attachments/assets/9ac6f6ed-03fa-49c7-b1df-2513f7684614" alt="Landing page" width="600"/>
+
+### Home Page
+<img src="https://github.com/user-attachments/assets/1e2543ad-dc3e-4818-8625-2812e59b47d2" alt="Home page" width="600"/>
+
+### Messaging Features
+<div>
+  <img src="https://github.com/user-attachments/assets/8f51f374-8602-4130-bd09-d20a00d95f32" alt="Create new message" width="400"/>
+  <img src="https://github.com/user-attachments/assets/c6664915-6522-44e5-a3b2-0f6893bec05b" alt="Write message" width="400"/>
+</div>
+
+<div>
+  <img src="https://github.com/user-attachments/assets/31186260-8d80-4044-8afc-0900792da4fb" alt="Receive message" width="400"/>
+  <img src="https://github.com/user-attachments/assets/355fee2b-468e-4d37-9a09-1677b793623b" alt="Answer" width="400"/>
+</div>
+
+### Group Features
+<div>
+  <img src="https://github.com/user-attachments/assets/f703ffa6-0808-415c-a5f3-b0a35653370b" alt="Creation Group" width="400"/>
+  <img src="https://github.com/user-attachments/assets/17804285-c8c7-4d22-877a-e7dc366dfb23" alt="Group message" width="400"/>
+</div>
+
+### Profile
+<img src="https://github.com/user-attachments/assets/de0c055c-42db-4f0b-9249-456afcb31c36" alt="Profile" width="600"/>
+
+</details>
 
 ## 🔧 Possible Improvements
 
