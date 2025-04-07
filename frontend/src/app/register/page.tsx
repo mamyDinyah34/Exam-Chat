@@ -17,7 +17,6 @@ const SignUp = () => {
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
-
   const dispatch: Dispatch<any> = useDispatch()
   const token = typeof window !== "undefined" ? localStorage.getItem(TOKEN) : null
   const state: AuthReducerState = useSelector((state: RootState) => state.auth)

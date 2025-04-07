@@ -60,7 +60,6 @@ const CreateSingleChat = (props: CreateSingleChatProps) => {
 
   return (
     <div className={`h-full ${isDarkMode ? "bg-gray-800" : "bg-white"}`}>
-      {/* Header */}
       <div className={`p-4 border-b flex items-center ${isDarkMode ? "border-gray-700" : "border-gray-200"}`}>
         <IconButton onClick={onHandleBack} className={isDarkMode ? "text-gray-300" : "text-gray-700"}>
           <ArrowLeft size={20} />
@@ -69,7 +68,6 @@ const CreateSingleChat = (props: CreateSingleChatProps) => {
       </div>
 
       <div className="p-4">
-        {/* Selected User Section */}
         <div className="mb-6">
           <p className={`font-medium mb-2 ${isDarkMode ? "text-gray-300" : "text-gray-700"}`}>Start chat with:</p>
 
@@ -78,7 +76,6 @@ const CreateSingleChat = (props: CreateSingleChatProps) => {
           </div>
         </div>
 
-        {/* Search Users */}
         <div className="mb-4">
           <TextField
             id="searchUser"
@@ -124,13 +121,11 @@ const CreateSingleChat = (props: CreateSingleChatProps) => {
           />
         </div>
 
-        {/* Search Results */}
         <div className="mb-6 max-h-60 overflow-y-auto">
           {userQuery.length > 0 &&
             authState.searchUser?.map((user) => <GroupMember member={user} onAddMember={onSetUser} key={user.id} />)}
         </div>
 
-        {/* Create Button */}
         <div className="flex justify-center">
           <Button
             variant="contained"

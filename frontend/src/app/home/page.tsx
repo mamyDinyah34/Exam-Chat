@@ -31,7 +31,6 @@ const Homepage = () => {
   const { theme, setTheme } = useTheme()
   const isDarkMode = theme === "dark"
   const dispatch = useDispatch<AppDispatch>()
-
   const [mounted, setMounted] = useState(false)
   const [isShowEditGroupChat, setIsShowEditGroupChat] = useState(false)
   const [isShowCreateGroupChat, setIsShowCreateGroupChat] = useState(false)
@@ -46,7 +45,6 @@ const Homepage = () => {
   const [newMessage, setNewMessage] = useState("")
   const [isConnected, setIsConnected] = useState(false)
   const [messageReceived, setMessageReceived] = useState(false)
-
   const stompClientRef = useRef<Client | null>(null)
 
   const open = Boolean(anchor)

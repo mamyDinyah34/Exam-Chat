@@ -86,7 +86,6 @@ const CreateGroupChat = (props: CreateGroupChatProps) => {
 
   return (
     <div className={`h-full ${isDarkMode ? "bg-gray-800" : "bg-white"}`}>
-      {/* Header */}
       <div className={`p-4 border-b flex items-center ${isDarkMode ? "border-gray-700" : "border-gray-200"}`}>
         <IconButton onClick={handleBack} className={isDarkMode ? "text-gray-300" : "text-gray-700"}>
           <ArrowLeft size={20} />
@@ -97,7 +96,6 @@ const CreateGroupChat = (props: CreateGroupChatProps) => {
       </div>
 
       <div className="p-4">
-        {/* Group Name */}
         <div className="mb-6">
           <TextField
             id="chatName"
@@ -123,7 +121,6 @@ const CreateGroupChat = (props: CreateGroupChatProps) => {
           />
         </div>
 
-        {/* Members Section */}
         <p className={`font-medium mb-2 ${isDarkMode ? "text-gray-300" : "text-gray-700"}`}>Members</p>
 
         <div className="mb-4 max-h-40 overflow-y-auto">
@@ -133,7 +130,6 @@ const CreateGroupChat = (props: CreateGroupChatProps) => {
             ))}
         </div>
 
-        {/* Search Users */}
         <div className="mb-4">
           <TextField
             id="searchUser"
@@ -179,7 +175,6 @@ const CreateGroupChat = (props: CreateGroupChatProps) => {
           />
         </div>
 
-        {/* Search Results */}
         <div className="mb-6 max-h-60 overflow-y-auto">
           {userQuery.length > 0 &&
             authState.searchUser
@@ -187,7 +182,6 @@ const CreateGroupChat = (props: CreateGroupChatProps) => {
               .map((user) => <GroupMember member={user} onAddMember={onAddMember} key={user.id} />)}
         </div>
 
-        {/* Create Button */}
         <div className="flex justify-center">
           <Button
             variant="contained"

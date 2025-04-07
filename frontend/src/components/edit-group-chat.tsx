@@ -62,7 +62,6 @@ const EditGroupChat = (props: EditGroupChatProps) => {
 
   return (
     <div className={`h-full ${isDarkMode ? "bg-gray-800" : "bg-white"}`}>
-      {/* Header */}
       <div className={`p-4 border-b flex items-center ${isDarkMode ? "border-gray-700" : "border-gray-200"}`}>
         <IconButton onClick={handleBack} className={isDarkMode ? "text-gray-300" : "text-gray-700"}>
           <ArrowLeft size={20} />
@@ -71,7 +70,6 @@ const EditGroupChat = (props: EditGroupChatProps) => {
       </div>
 
       <div className="p-4">
-        {/* Current Members Section */}
         <div className="mb-6">
           <div className="flex items-center mb-2">
             <UserMinus size={16} className={`mr-2 ${isDarkMode ? "text-gray-300" : "text-gray-700"}`} />
@@ -85,7 +83,6 @@ const EditGroupChat = (props: EditGroupChatProps) => {
           </div>
         </div>
 
-        {/* Add Members Section */}
         <div className="mb-4">
           <div className="flex items-center mb-2">
             <UserPlus size={16} className={`mr-2 ${isDarkMode ? "text-gray-300" : "text-gray-700"}`} />
@@ -136,7 +133,6 @@ const EditGroupChat = (props: EditGroupChatProps) => {
           />
         </div>
 
-        {/* Search Results */}
         <div className="max-h-60 overflow-y-auto">
           {userQuery.length > 0 &&
             authState.searchUser

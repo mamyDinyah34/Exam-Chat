@@ -29,20 +29,16 @@ const SignIn = () => {
     password: "",
   })
 
-  // Set mounted state
   useEffect(() => {
     setMounted(true)
   }, [])
 
-  // Handle authentication check on mount
   useEffect(() => {
-    // Only check token if we're not in force login mode and not already logged in
     if (token && !forceLoginMode && !state.reqUser) {
       dispatch(currentUser(token))
     }
   }, [token, forceLoginMode, state.reqUser, dispatch])
 
-  // Handle redirection after successful login
   useEffect(() => {
     if (state.reqUser && !forceLoginMode) {
       router.push("/home")
@@ -62,7 +58,6 @@ const SignIn = () => {
     if (forceLoginMode || !state.reqUser) {
       setIsLoggingIn(true)
 
-      // Dispatch login action
       dispatch(loginUser(signInData)).finally(() => {
         setIsLoggingIn(false)
       })
